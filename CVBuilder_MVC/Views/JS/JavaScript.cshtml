@@ -1,0 +1,117 @@
+﻿@model CVBuilder_MVC.Models.JScript
+@{
+    ViewBag.Title = "JavaScript";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<!-- page wrapper start -->
+<div class="wrapper">
+    <div class="page-title-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="page-title">User Information</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- page-title-box -->
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-20">
+
+                        @using (Html.BeginForm("JavaScript", "JS", FormMethod.Post))
+                        {
+
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title">Textual inputs</h4>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Value One</label>
+                                        @Html.TextBoxFor(a => a.ValueOne, new { @class = "form-control", onkeyup = "Calculate();" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Value Two</label>
+                                        @Html.TextBoxFor(a => a.ValueTwo, new { @class = "form-control", onkeyup = "Calculate();" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Value Three</label>
+                                        @Html.TextBoxFor(a => a.ValueThree, new { @class = "form-control", onkeyup = "Calculate();" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Value Four</label>
+                                        @Html.TextBoxFor(a => a.ValueFour, new { @class = "form-control", onkeyup = "Calculate();" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Value Five</label>
+                                        @Html.TextBoxFor(a => a.ValueFive, new { @class = "form-control", onkeyup = "Calculate();" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Value Six</label>
+                                        @Html.TextBoxFor(a => a.ValueSix, new { @class = "form-control", onkeyup = "Calculate();" })
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label class="col-form-label">Operator </label>
+                                        @Html.DropDownListFor(a => a.Operator, new List<SelectListItem>() {
+                                           new SelectListItem(){ Text="+",Value="+"},
+                                           new SelectListItem(){ Text="-",Value="-"},
+                                           new SelectListItem(){ Text="*",Value="*"},
+                                           new SelectListItem(){ Text="/",Value="/"}
+                                           }, "Please Select Operator", new { @class = "form-control", onchange = "Calculate();" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <label for="example-text-input" class="col-form-label">Result</label>
+                                        @Html.TextBoxFor(a => a.Result, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- end page content-->
+
+</div>
+<!-- page wrapper end -->
+<script>
+
+    function Calculate() {
+       /* debugger;*/
+        var ValueOne = parseInt($('#ValueOne').val());
+        var ValueTwo = parseInt($('#ValueTwo').val());
+        var ValueThree = parseInt($('#ValueThree').val());
+        var ValueFour = parseInt($('#ValueFour').val());
+        var ValueFive = parseInt($('#ValueFive').val());
+        var ValueSix = parseInt($('#ValueSix').val());
+        var Operator = ($('#Operator').val());
+        if (Operator == "+") {
+            var Result = ValueOne + ValueTwo + ValueThree + ValueFour + ValueFive + ValueSix;
+            $('#Result').val(Result)
+        }
+        else if (Operator == "-") {
+            var Result = ValueOne - ValueTwo - ValueThree - ValueFour - ValueFive - ValueSix;
+            $('#Result').val(Result)
+        }
+        else if (Operator == "/") {
+            var Result = ValueOne / ValueTwo / ValueThree / ValueFour / ValueFive / ValueSix;
+            $('#Result').val(Result)
+        }
+        else if (Operator == "*") {
+            var Result = ValueOne * ValueTwo * ValueThree * ValueFour * ValueFive * ValueSix;
+            $('#Result').val(Result)
+        }
+    }
+
+</script>

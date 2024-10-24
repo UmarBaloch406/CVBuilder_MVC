@@ -1,0 +1,49 @@
+﻿@model List<CVBuilder_MVC.Models.Experience>
+
+
+    <div class="card m-b-20">
+        <div class="card-body">
+
+            <h4 class="mt-0 header-title" style="text-align:center">Experience List</h4>
+            <div class="form-group ">
+
+                <table id="datatable" class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            @*<th>ExperienceId</th>
+                            <th>UserId</th>*@
+                            <th>Title</th>
+                            <th>Department</th>
+                            <th>StartDate</th>
+                            <th>EndDate</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @*<td>@item.ExperienceId</td>
+                                <td>@item.UserId</td>*@
+                                <td>@item.Title</td>
+                                <td>@item.Department</td>
+                                <td>@item.StartDate</td>
+                                <td>@item.EndDate</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <a href="#" onclick="Delete(@item.ExperienceId)"><i class="fa fa-trash"></i></a>
+                                    &nbsp; | &nbsp;
+                                    <a href="#" onclick="Edit(@item.ExperienceId)"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+

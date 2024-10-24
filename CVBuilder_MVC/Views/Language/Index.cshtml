@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<!-- page wrapper start -->
+<div class="wrapper">
+    <div class="page-title-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="page-title">User Languages</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- page-title-box -->
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="card m-b-20" id="Divfrm">
+                       
+                    </div>
+                </div> <!-- end col -->
+                @*@Html.Action("GetLanguageList", "Language")*@
+                <div class="col-8" id="DivLoad">
+
+
+                </div> <!-- end row -->
+
+
+
+
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end page content-->
+
+    </div>
+</div>
+<!-- page wrapper end -->
+<script>
+
+    $(document).ready(function () {
+        LoadGrid();
+        Getfrm();
+    });
+
+
+    function SaveLanguage() {
+        var LanguageName = $('#LanguageName').val();
+        var Status = $('#Status').val();
+        var LanguageId = $('#LanguageId').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/Language/Submit',
+            data: {
+                LanguageName: LanguageName,
+                Status: Status,
+                LanguageId: LanguageId,
+            },
+            success: function () {
+                LoadGrid();
+            }
+        });
+    }
+
+    function LoadGrid() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/Language/GetLanguageList',
+            success: function (res) {
+                $('#DivLoad').html(res);
+            }
+        });
+    }
+
+    function Getfrm() {
+        $.ajax({
+            type: 'GET',
+            url: '/Language/Getfrm',
+            success: function (res) {
+                $('#Divfrm').html(res);
+            }
+        });
+    }
+
+    function Delete(LanguageId) {
+
+        $.ajax({
+            type: 'Post',
+            url: '/Language/Delete',
+            data: {
+                LanguageId: LanguageId
+            },
+            success: function () {
+                debugger;
+                LoadGrid();
+            }
+
+        });
+    }
+    function Edit(LanguageId) {
+        $.ajax({
+            type: 'GET',
+            url: '/Language/Update',
+            data: {
+                LanguageId: LanguageId
+            },
+            success: function (res) {
+                $('#Divfrm').html(res);
+            }
+
+        });
+    }
+</script>
+

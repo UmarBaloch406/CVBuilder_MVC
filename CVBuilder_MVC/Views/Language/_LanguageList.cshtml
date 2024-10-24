@@ -1,0 +1,44 @@
+﻿@model List<CVBuilder_MVC.Models.Language>
+
+
+
+<div class="card m-b-20">
+    <div class="card-body">
+
+        <h4 class="mt-0 header-title" style="text-align:center">Language List</h4>
+        <div class="form-group ">
+
+            <table id="datatable" class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>LanguageId</th>
+                        <th>UserId</th>
+                        <th>LanguageName</th>
+
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.LanguageId</td>
+                            <td>@item.UserId</td>
+                            <td>@item.LanguageName</td>
+
+                            <td>@item.Status</td>
+                            <td>
+                                <a href="#" onclick="Delete(@item.LanguageId)"><i class="fa fa-trash"></i></a>
+                                &nbsp; | &nbsp;
+                                <a href="#" onclick="Edit(@item.LanguageId)"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+

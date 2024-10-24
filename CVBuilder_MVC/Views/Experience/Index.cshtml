@@ -1,0 +1,119 @@
+﻿@model CVBuilder_MVC.Models.Experience
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<!-- page wrapper start -->
+<div class="wrapper">
+    <div class="page-title-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="page-title">User Experience</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- page-title-box -->
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card m-b-20" id="Divfrm">
+
+                    </div>
+                </div> <!-- end col -->
+                @*@Html.Action("GetExperienceList", "Experience")*@
+                <div class="col-8" id="DivLoad">
+
+                </div>
+
+            </div> <!-- end row -->
+
+
+
+
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- end page content-->
+
+</div>
+<!-- page wrapper end -->
+<script>
+    $(document).ready(function () {
+        LoadGrid();
+        Getfrm();
+    })
+
+    function SaveExperience() {
+
+        var Title = $('#Title').val();
+        var Department = $('#Department').val();
+        var StartDate = $('#StartDate').val();
+        var EndDate = $('#EndDate').val();
+        var Status = $('#Status').val();
+        var ExperienceId = $('#ExperienceId').val();
+
+        $.ajax({
+            type: 'Post',
+            url: '/Experience/Submit',
+            data: {
+                Title: Title,
+                Department: Department,
+                StartDate: StartDate,
+                EndDate: EndDate,
+                Status: Status,
+                ExperienceId: ExperienceId
+            },
+            success: function () {
+                LoadGrid();
+            }
+        });
+    }
+
+    function LoadGrid() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/Experience/GetExperienceList',
+            success: function (data) {
+                $('#DivLoad').html(data)
+            }
+        });
+    }
+    function Delete(ExperienceId) {
+        $.ajax({
+            type: 'Post',
+            url: '/Experience/Delete',
+            data: { ExperienceId: ExperienceId },
+            success: function () {
+                LoadGrid();
+            }
+        })
+    }
+
+    function Getfrm() {
+        $.ajax({
+            type: 'GET',
+            url: '/Experience/Getfrm',
+            success: function (data) {
+                $("#Divfrm").html(data);
+            }
+        });
+    }
+    function Edit(ExperienceId) {
+        $.ajax({
+            type: 'GET',
+            url: '/Experience/Update',
+            data: { ExperienceId: ExperienceId },
+            success: function (data) {
+                $('#Divfrm').html(data);
+            }
+        });
+    }
+
+</script>

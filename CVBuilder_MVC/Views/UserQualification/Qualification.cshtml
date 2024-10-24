@@ -1,0 +1,154 @@
+﻿@model CVBuilder_MVC.Models.Qualification
+@{
+    ViewBag.Title = "Qualification";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<!-- page wrapper start -->
+<div class="wrapper">
+    <div class="page-title-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="page-title">User Qualification</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- page-title-box -->
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-20">
+
+                        @using (Html.BeginForm("", "", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(a => a.QualificationId)
+
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title">Enter Qualifications</h4>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Title @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Institute @Html.ValidationMessageFor(a => a.Institute, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Institute, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Session @Html.ValidationMessageFor(a => a.Session, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Session, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">TotalMarks @Html.ValidationMessageFor(a => a.TotalMarks, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.TotalMarks, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">ObtainMarks @Html.ValidationMessageFor(a => a.ObtainMarks, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.ObtainMarks, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Percentage @Html.ValidationMessageFor(a => a.Percentage, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Percentage, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Grade @Html.ValidationMessageFor(a => a.Grade, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Grade, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="col-form-label">Status @Html.ValidationMessageFor(a => a.Status, null, new { @class = "text-danger" })</label>
+                                        @Html.DropDownListFor(a => a.Status, new List<SelectListItem>() {
+                                           new SelectListItem(){ Text="Active",Value="1"},
+                                           new SelectListItem(){ Text="Inactive",Value="0"}
+                                           }, "Please Select Status", new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <input type="button" onclick="SaveQualication();" style="float:right" class="btn btn-primary mt-2" name="name" value="Save Qualification" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+            <div class="col-12" id="DivLoad">
+
+
+            </div>
+
+            @*@Html.Action("QualificationList", "UserQualification")*@
+
+
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- end page content-->
+
+</div>
+<!-- page wrapper end -->
+
+<script>
+
+    $(document).ready(function () {
+        LoadData();
+    })
+
+    function SaveQualication() {
+        var Title = $('#Title').val();
+        var Institute = $('#Institute').val();
+        var Session = $('#Session').val();
+        var TotalMarks = $('#TotalMarks').val();
+        var ObtainMarks = $('#ObtainMarks').val();
+        var Percentage = $('#Percentage').val();
+        var Grade = $('#Grade').val();
+        var Status = $('#Status').val();
+
+        $.ajax({
+            type: 'Post',
+            url: '/UserQualification/Submit',
+            data: {
+                Title: Title,
+                Institute: Institute,
+                Session: Session,
+                TotalMarks: TotalMarks,
+                ObtainMarks: ObtainMarks,
+                Percentage: Percentage,
+                Grade: Grade,
+                Status: Status
+            },
+            success: function () {
+                LoadData();
+            }
+        });
+    }
+    function LoadData() {
+        
+        $.ajax({
+            type: 'GET',
+            url: '/UserQualification/QualificationList',
+            success: function (data) {
+                $('#DivLoad').html(data)
+            }
+        });
+    }
+    function Delete(QualificationId) {
+        $.ajax({
+            type: 'Post',
+            url: '/UserQualification/Delete',
+            data: { QualificationId: QualificationId },
+            success: function () {
+                LoadData();
+            }
+        });
+    }
+
+
+</script>

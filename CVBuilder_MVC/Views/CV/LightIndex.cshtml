@@ -1,0 +1,291 @@
+﻿@model CVBuilder_MVC.Models.Others.ViewModal
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Zoovara - Personal Template</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta content="A premium personal template by Mannatthemes" name="description">
+    <meta content="Mannatthemes" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/accetsDesign/assetsCV/images/favicon.ico">
+    <link href="/accetsDesign/assetsCV/plugins/filter/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="/accetsDesign/assetsCV/plugins/animated/headline.css" rel="stylesheet" type="text/css">
+    <!-- App css -->
+    <link href="/accetsDesign/assetsCV/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/accetsDesign/assetsCV/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="/accetsDesign/assetsCV/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="uil uil-cell text-primary"></i>Zoovara
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--end navbar-toggler-->
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-blue btn-sm px-4" href="#" id="lnkPrint">
+                            <i class="'uil uil-print mr-1 font-16"></i>Print
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--end collapse-->
+        </div>
+        <!--end container-->
+    </nav>
+    <!--end nav-->
+    <div class="main-wraper">
+        <section class="section bg-profile" id="profile_ripple">
+            <div class="zoo-profile">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-print-6 align-self-center mb-3 mb-lg-0">
+                            <div class="zoo-profile-main">
+                                <div class="zoo-profile-main-pic">
+                                    <img src="@Model.User.Image" width="128" height="128" alt="" class="rounded-circle">
+                                    <span class="zoo-user-message">
+                                        <i class="uil uil-comment-dots"></i>
+                                    </span>
+                                </div>
+                                <!--end zoo-profile-main-pic-->
+                                <div class="zoo-profile_user-detail">
+                                    <h5 class="zoo-user-name">@Model.User.FirstName @Model.User.LastName</h5>
+                                    <p class="cd-headline loading-bar">
+                                        <span class="cd-words-wrapper">
+                                            @foreach (var item in Model.Skills)
+                                            {
+                                                <b class="is-visible">@item.Title</b>
+                                            }
+                                        </span>
+                                    </p>
+                                </div>
+                                <!--end zoo-profile_user-detail-->
+                            </div>
+                            <!--end profile-main-pic-->
+                        </div>
+                        <!--end col-->
+                        <div class="col-sm-4 col-print-4 ml-auto">
+                            <ul class="list-unstyled personal-detail">
+                                <li>
+                                    <i class="'uil uil-phone-volume mr-2"></i>
+                                    <b>Phone </b>: @Model.User.Contact
+                                </li>
+                                <li class="mt-2">
+                                    <i class="uil uil-envelope mt-2 mr-2"></i>
+                                    <b>Email </b>: @Model.User.Email
+                                </li>
+                            </ul>
+                            <!--end personal-detail-->
+                            <ul class="list-inline social-icon mb-0">
+                                <li class="list-inline-item">
+                                    <a href="#" class="bg-blue">
+                                        <i class="uil uil-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="bg-secondary">
+                                        <i class="uil uil-twitter"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="bg-pink">
+                                        <i class="uil uil-dribbble"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end social-icon-->
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end container-->
+            </div>
+            <!--end zoo-profile-->
+        </section>
+        <!--end section-->
+        <section class="section-md">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="header-title mb-3">About us !</h4>
+                    </div>
+                    <!--end col-->
+                    <div class="col-sm-6 col-print-6">
+                        <h4 class="text-primary font-weight-bold">I'm @Model.User.FirstName  @Model.User.LastName</h4>
+                        <p>@Model.User.About</p>
+                        
+                    </div>
+                    <!--end col-->
+                    <div class="col-sm-5 col-print-5 offset-lg-1 align-self-center">
+                        <p>
+                            <span class="personal-detail-title">Name</span>
+                            <span class="personal-detail-info">@Model.User.FirstName @Model.User.LastName</span>
+                        </p>
+                        <p>
+                            <span class="personal-detail-title">Father Name</span>
+                            <span class="personal-detail-info">@Model.User.FatherName</span>
+                        </p>
+                        <p>
+                            <span class="personal-detail-title">Spoken Langages</span>
+                            <span class="personal-detail-info">
+
+                                @foreach (var item in Model.Languages)
+                                {
+                                    @item.LanguageName 
+                                }
+                            </span>
+                        </p>
+                        <p>
+                            <span class="personal-detail-title">CNIC</span>
+                            <span class="personal-detail-info">@Model.User.CNIC</span>
+                        </p>
+                        <p>
+                            <span class="personal-detail-title">Address</span>
+                            <span class="personal-detail-info">@Model.User.Address</span>
+                        </p>
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+        <!--end section-->
+        <section class="section-md">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="header-title mb-3">Education & Skills</h4>
+                    </div>
+                    <!--end col-->
+                    <div class="col-sm-6 col-print-6">
+                        <div class="row">
+                            <div class="col-sm-6 col-print-6">
+                                <div class="resume-icon">
+                                    <i class="uil uil-graduation-hat"></i>
+                                    <h5 class="mt-n2">Education</h5>
+                                </div>
+                                <!--end resume-icon-->
+                                <div class="timeline">
+                                    @foreach (var item in Model.Qualifications)
+                                    {
+
+
+                                        <div class="time-item">
+                                            <div class="item-info">
+                                                <div class="font-14">@item.Session</div>
+                                                <h5 class="my-1 text-light">@item.Title</h5>
+                                                <p>@item.Institute</p>
+                                                <p>Total Marks :@item.TotalMarks</p>
+                                                <p>Obtained :@item.ObtainMarks</p>
+                                            </div>
+                                        </div>
+
+                                    }
+                                </div>
+                                <!--end timeline-->
+                            </div>
+                            <!--end col-->
+                            <div class="col-sm-6 col-print-6">
+                                <div class="resume-icon">
+                                    <i class="uil uil-suitcase-alt"></i>
+                                    <h5 class="mt-n2">Experience</h5>
+                                </div>
+                                <!--end resume-icon-->
+                                <div class="timeline">
+                                    @foreach (var item in Model.Experiences)
+                                    {
+
+
+                                        <div class="time-item">
+                                            <div class="item-info">
+                                                <div class="font-14">@item.StartDate.Date @item.EndDate.Date</div>
+                                                <h5 class="my-1 text-light">Title :@item.Title</h5>
+                                                <p>Department :@item.Department</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <!--end timeline-->
+                            </div>
+                            <!--end col-->
+                        </div>
+                        <!--end row-->
+                    </div>
+                    <!--end col-->
+                    <div class="col-sm-6 col-print-6 align-self-center">
+                        <div class="skills mt-4">
+                            @foreach (var item in Model.Skills)
+                            {
+
+
+                                <div class="skill-box">
+                                    <h4 class="skill-title">@item.Title</h4>
+                                    <div class="progress-line">
+                                        <span data-percent="@item.Percentage%" style="width: @item.Percentage;"><span class="percent-tooltip">@item.Percentage%</span></span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <!--end skill-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+     
+        <section class="section-md thanks-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-center">Thank you !</h3>
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+        <!--end section-->
+        <footer class="footer-area">
+            <div class="container">
+                <div class="row">
+                    @*<div class="col-sm-12 text-center">
+                        <p class="copyright mb-0 py-4">© 2019. Design By Mannat-Theme</p>
+                    </div>*@
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </footer>
+        <!--end footer-area-->
+    </div>
+
+
+    <script src="/accetsDesign/assetsCV/js/jquery.min.js"></script>
+    <script src="/accetsDesign/assetsCV/js/bootstrap.bundle.min.js"></script>
+    <script src="/accetsDesign/assetsCV/plugins/ripple/jquery.ripples.js"></script>
+    <script src="/accetsDesign/assetsCV/plugins/counter/jquery.counterup.min.js"></script>
+    <script src="/accetsDesign/assetsCV/plugins/counter/waypoints.min.js"></script>
+    <script src="/accetsDesign/assetsCV/plugins/filter/isotope.pkgd.min.js"></script>
+    <script src="/accetsDesign/assetsCV/plugins/filter/masonry.pkgd.min.js"></script>
+    <script src="/accetsDesign/assetsCV/plugins/filter/jquery.magnific-popup.min.js"></script>
+    <script src="/accetsDesign/assetsCV/plugins/animated/headline.js"></script>
+    <!-- App js -->
+    <script src="/accetsDesign/assetsCV/js/app.js"></script>
+</body>
+</html>

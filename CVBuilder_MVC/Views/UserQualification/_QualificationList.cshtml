@@ -1,0 +1,53 @@
+﻿@model List<CVBuilder_MVC.Models.Qualification>
+<div class="row">
+     
+    
+        <div class="card m-b-20">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title" style="text-align:center">Qualification List</h4>
+                <div class="form-group">
+
+                    <table id="datatable" class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                              
+                                <th>Title</th>
+                                <th>Institute</th>
+                                <th>Session</th>
+                                <th>TotalMarks</th>
+                                <th>ObtainMarks</th>
+                                <th>Percentage</th>
+                                <th>Grade</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    
+                                    <td>@item.Title</td>
+                                    <td>@item.Institute</td>
+                                    <td>@item.Session</td>
+                                    <td>@item.TotalMarks</td>
+                                    <td>@item.ObtainMarks</td>
+                                    <td>@item.Percentage</td>
+                                    <td>@item.Grade</td>
+                                    <td>@item.Status</td>
+                                    <td>
+                                        <a href="#" onclick="Delete(@item.QualificationId);"><i class="fa fa-trash"></i></a>
+                                        &nbsp; | &nbsp;
+                                        <a href="/UserQualification/Update?QualificationId=@item.QualificationId"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+

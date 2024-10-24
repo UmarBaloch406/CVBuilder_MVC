@@ -1,0 +1,41 @@
+﻿
+@model CVBuilder_MVC.Models.Experience
+
+@using (Html.BeginForm("", "", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.ExperienceId)
+    <div class="card-body">
+        <h4 class="mt-0 header-title" style="text-align:center">Enter Experience</h4>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label for="example-text-input" class="col-form-label">Title @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })</label>
+                @Html.TextBoxFor(a => a.Title, new { @class = "form-control" })
+            </div>
+
+            <div class="col-sm-12">
+                <label for="example-text-input" class="col-form-label">Department @Html.ValidationMessageFor(a => a.Department, null, new { @class = "text-danger" })</label>
+                @Html.TextBoxFor(a => a.Department, new { @class = "form-control" })
+            </div>
+            <div class="col-sm-12">
+                <label for="example-text-input" class="col-form-label">StartDate @Html.ValidationMessageFor(a => a.StartDate, null, new { @class = "text-danger" })</label>
+                @Html.TextBoxFor(a => a.StartDate, new { @class = "form-control", type = "date" })
+            </div>
+            <div class="col-sm-12">
+                <label for="example-text-input" class="col-form-label">EndDate @Html.ValidationMessageFor(a => a.EndDate, null, new { @class = "text-danger" })</label>
+                @Html.TextBoxFor(a => a.EndDate, new { @class = "form-control", type = "date" })
+            </div>
+
+            <div class="col-sm-12">
+                <label class="col-form-label">Status @Html.ValidationMessageFor(a => a.Status, null, new { @class = "text-danger" })</label>
+                @Html.DropDownListFor(a => a.Status, new List<SelectListItem>() {
+                   new SelectListItem(){ Text="Active",Value="1"},
+                   new SelectListItem(){ Text="Inactive",Value="0"}
+                   }, "Please Select Status", new { @class = "form-control" })
+            </div>
+
+            <div class="col-sm-12">
+                <input type="button" onclick="SaveExperience();" style="float:right" class="btn btn-primary mt-2" name="name" value="Save Experience" />
+            </div>
+        </div>
+    </div>
+}

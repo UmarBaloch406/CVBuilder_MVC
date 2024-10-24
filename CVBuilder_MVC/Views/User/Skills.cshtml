@@ -1,0 +1,139 @@
+﻿@model CVBuilder_MVC.Models.Skill
+
+@{
+    ViewBag.Title = "Skills";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<!-- page wrapper start -->
+<div class="wrapper">
+    <div class="page-title-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="page-title">User Skills</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- page-title-box -->
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="card m-b-20">
+                        @using (Html.BeginForm("", "", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(a => a.SkillId)
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title" style="text-align:center">Enter Skills</h4>
+                                <div class="form-group row">
+
+                                    <div class="col-sm-12">
+                                        <label for="example-text-input" class="col-form-label">Title @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="example-text-input" class="col-form-label">Level @Html.ValidationMessageFor(a => a.Level, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Level, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="example-text-input" class="col-form-label">Percentage @Html.ValidationMessageFor(a => a.Percentage, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Percentage, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label">Status @Html.ValidationMessageFor(a => a.Status, null, new { @class = "text-danger" })</label>
+                                        @Html.DropDownListFor(a => a.Status, new List<SelectListItem>() {
+                                           new SelectListItem(){ Text="Active",Value="1"},
+                                           new SelectListItem(){ Text="Inactive",Value="0"}
+                                           }, "Please Select Status", new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <input type="button" onclick="SaveSkills();" style="float:right" class="btn btn-primary mt-2" name="name" value="Save Skills" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div> <!-- end col -->
+
+
+                <div class="col-8" id="DivLoad">
+                    @*@Html.Action("GetSkillList", "User")*@
+
+                </div>
+
+            </div> <!-- end row -->
+
+
+
+
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- end page content-->
+
+</div>
+<!-- page wrapper end -->
+<script>
+
+    $(document).ready(function () {
+        LoadData();
+    });
+
+    function SaveSkills() {
+
+        var Title = $('#Title').val();
+        var Level = $('#Level').val();
+        var Percentage = $('#Percentage').val();
+        var Status = $('#Status').val();
+
+        $.ajax({
+            type: 'Post',
+            url: '/User/Submit',
+            data: {
+                Title: Title,
+                Level: Level,
+                Percentage: Percentage,
+                Status: Status
+            },
+            success: function () {
+                LoadData();
+            }
+        });
+    }
+    function LoadData() {
+        $.ajax({
+            type: 'GET',
+            url: '/User/GetSkillList',
+            success: function (data) {
+                $('#DivLoad').html(data)
+            }
+        })
+    }
+    
+    function Delete(SkillId) {
+        
+        $.ajax({
+            
+            type: 'Post',
+            url: '/User/Delete',
+            data: { SkillId: SkillId },
+            
+            success: function () {
+                LoadData();
+            }
+        })
+    }
+
+
+
+
+
+</script>

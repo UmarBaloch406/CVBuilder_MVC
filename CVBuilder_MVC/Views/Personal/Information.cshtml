@@ -1,0 +1,108 @@
+﻿@model CVBuilder_MVC.Models.User
+@{
+    ViewBag.Title = "Information";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+<!-- page wrapper start -->
+<div class="wrapper">
+    <div class="page-title-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="page-title">User Information</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- page-title-box -->
+
+    <div class="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-20">
+
+                        @using (Html.BeginForm("UpdateUser", "Personal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.HiddenFor(a => a.UserId)
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title">Textual inputs</h4>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">First Name @Html.ValidationMessageFor(a => a.FirstName, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.FirstName, new { @class = "form-control", onkeyup = "Show();" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Last Name @Html.ValidationMessageFor(a => a.LastName, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.LastName, new { @class = "form-control", onkeyup = "Show();" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Father Name @Html.ValidationMessageFor(a => a.FatherName, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.FatherName, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Email @Html.ValidationMessageFor(a => a.Email, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Email, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">CNIC @Html.ValidationMessageFor(a => a.CNIC, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.CNIC, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Contact @Html.ValidationMessageFor(a => a.Contact, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Contact, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">About @Html.ValidationMessageFor(a => a.About, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.About, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Image</label>
+                                        @Html.TextBoxFor(a => a.ImageFile, new { @class = "form-control", type = "file" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="col-form-label">Gender @Html.ValidationMessageFor(a => a.Gender, null, new { @class = "text-danger" })</label>
+                                        @Html.DropDownListFor(a => a.Gender, new List<SelectListItem>() {
+                                           new SelectListItem(){ Text="Male",Value="Male"},
+                                           new SelectListItem(){ Text="Female",Value="Female"}
+                                           }, "Please Select Gender", new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="example-text-input" class="col-form-label">Address @Html.ValidationMessageFor(a => a.Address, null, new { @class = "text-danger" })</label>
+                                        @Html.TextBoxFor(a => a.Address, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input type="submit" style="float:right" class="btn btn-primary mt-2" name="name" value="Update Information" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+    </div>
+    <!-- end page content-->
+
+</div>
+<!-- page wrapper end -->
+<script>
+
+    //$(document).ready(function () {
+    //    debugger;
+    //    var FirstName = $('#FirstName').val();
+    //     $('#LastName').val(FirstName);
+    //    //alert(FirstName + ' '+LastName);
+    //});
+    function Show() {
+        var FirstName = parseInt($('#FirstName').val());
+        var LastName = parseInt($('#LastName').val());
+        $('#FatherName').val(FirstName + LastName);
+
+    }
+
+
+</script>

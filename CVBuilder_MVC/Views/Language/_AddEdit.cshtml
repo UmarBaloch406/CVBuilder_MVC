@@ -1,0 +1,29 @@
+﻿@model CVBuilder_MVC.Models.Language
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(a => a.LanguageId)
+    <div class="card-body">
+        <h4 class="mt-0 header-title" style="text-align:center">Enter Languages</h4>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label for="example-text-input" class="col-form-label">Language Name @Html.ValidationMessageFor(a => a.LanguageName, null, new { @class = "text-danger" })</label>
+                @Html.TextBoxFor(a => a.LanguageName, new { @class = "form-control" })
+               
+            </div>
+
+
+            <div class="col-sm-12">
+                <label class="col-form-label">Status @Html.ValidationMessageFor(a => a.Status, null, new { @class = "text-danger" })</label>
+                @Html.DropDownListFor(a => a.Status, new List<SelectListItem>() {
+                   new SelectListItem(){ Text="Active",Value="1"},
+                   new SelectListItem(){ Text="Inactive",Value="0"}
+                   }, "Please Select Status", new { @class = "form-control" })
+            </div>
+
+            <div class="col-sm-12">
+                <input type="button" onclick="SaveLanguage();" style="float:right" class="btn btn-primary mt-2" name="name" value="Save Language" />
+            </div>
+        </div>
+    </div>
+}
